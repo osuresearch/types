@@ -128,9 +128,13 @@ export type Agent = Atom & {
 
   /**
    * The IRI that identifies the agent.
-   * For OSU staff and faculty, this is an employee ID
+   *
+   * For OSU staff and faculty, this is an employee ID.
+   *
+   * For organizations, software, or external individuals,
+   * this may not have a value.
    */
-  id: string
+  id?: string
 
   /** The name of the agent */
   name: string
@@ -323,17 +327,32 @@ export type EducationalOccupationalCredential = Atom & {
 export type DigitalDocument = {
   type: 'DigitalDocument'
 
+  /**
+   * The IRI that identifies the agent.
+   */
+  id?: string
+
   creator?: Agent
 
   name: string
   description?: string
 
+  /**
+   * The date/time at which the document was created.
+   */
   dateCreated?: DateTime
+
+  /**
+   * The date/time at which the document was created.
+   */
   dateModified?: DateTime
 
   /** The textual content of this work. */
   text?: string
 
+  /**
+   * Keywords or tags used to describe the document
+   */
   keywords?: string[]
 
   // TODO: Source document linkage, tags, and all that jazz.
@@ -474,6 +493,16 @@ export type EmailMessage = Atom & {
    * Often `text/html` or `text/plain`.
    */
   encodingFormat: string
+
+  /**
+   * The date/time at which the message was created.
+   */
+  dateCreated?: DateTime
+
+  /**
+   * The date/time at which the message was modified.
+   */
+  dateModified?: DateTime
 
   /**
    * The date/time at which the message was sent.
