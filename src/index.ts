@@ -14,7 +14,7 @@ export const atomicClass = [
   // Temporals
   'DateTime',
   'DateTimeRange',
-  
+
   // Organizationals
   'Person',
   'Organization',
@@ -26,23 +26,24 @@ export const atomicClass = [
   'EducationalOccupationalCredential',
   'DigitalDocument',
   'Action',
+  'EmailMessage',
 ] as const
 
 export type AtomicClass = typeof atomicClass[number]
 
 export type AnyAtom = Text | Website | Email | Flag
   | Numeric | NumericRange | MonetaryAmount
-  | DateTime | DateTimeRange 
+  | DateTime | DateTimeRange
   | Person | Organization | Software
   | Reference | PostalAddress | EducationalOccupationalCredential
-  | DigitalDocument | Action
+  | DigitalDocument | Action | EmailMessage
 
 export type Atom = {
-  /** 
+  /**
    * Type class of this atomic value.
-   * 
-   * This allows us to enforce type information across 
-   * untyped service boundaries. 
+   *
+   * This allows us to enforce type information across
+   * untyped service boundaries.
    */
   type: AtomicClass
 }
@@ -74,8 +75,8 @@ export type Numeric = Atom & {
 
 export type NumericRange = Atom & {
   type: 'NumericRange'
-  fromValue: number 
-  toValue: number 
+  fromValue: number
+  toValue: number
 }
 
 /**
@@ -86,8 +87,8 @@ export type MonetaryAmount = Atom & {
 
   /**
    * The currency in which the monetary amount is expressed.
-   * Use standard formats: [ISO 4217 currency format](http://en.wikipedia.org/wiki/ISO_4217), 
-   * e.g. "USD" 
+   * Use standard formats: [ISO 4217 currency format](http://en.wikipedia.org/wiki/ISO_4217),
+   * e.g. "USD"
    */
   currency: string
 
@@ -96,7 +97,7 @@ export type MonetaryAmount = Atom & {
 }
 
 /**
- * A combination of date and time of day in the form 
+ * A combination of date and time of day in the form
  * [-]CCYY-MM-DDThh:mm:ss[Z|(+|-)hh:mm] (see Chapter 5.4 of ISO 8601).
  */
 export type DateTime = Atom & {
@@ -105,7 +106,7 @@ export type DateTime = Atom & {
 }
 
 /**
- * A range of combined of date and time of day in the form 
+ * A range of combined of date and time of day in the form
  * [-]CCYY-MM-DDThh:mm:ss[Z|(+|-)hh:mm] (see Chapter 5.4 of ISO 8601).
  */
 export type DateTimeRange = Atom & {
@@ -116,16 +117,16 @@ export type DateTimeRange = Atom & {
 
 /**
  * The direct performer or driver of the action (animate or inanimate)
- * 
- * Use a concrete agent type such as `Person`, `Organization`, or 
+ *
+ * Use a concrete agent type such as `Person`, `Organization`, or
  * `Software` instead of this type.
- * 
+ *
  * @see https://schema.org/agent
  */
 export type Agent = Atom & {
   type: 'Person' | 'Organization' | 'Software'
 
-  /** 
+  /**
    * The IRI that identifies the agent.
    * For OSU staff and faculty, this is an employee ID
    */
@@ -134,9 +135,9 @@ export type Agent = Atom & {
   /** The name of the agent */
   name: string
 
-  /** 
-   * The nickname of the agent. 
-   * 
+  /**
+   * The nickname of the agent.
+   *
    * For OSU staff and faculty, this should be a Name.#
    * for avatar resolution through OPIC.
    */
@@ -150,7 +151,7 @@ export type Agent = Atom & {
 
 /**
  * A person (alive, dead, undead, or fictional).
- * 
+ *
  * This is an agent with extended fields from https://schema.org/Person
  */
 export type Person = Agent & {
@@ -168,24 +169,24 @@ export type Person = Agent & {
 
 /**
  * An organization such as a school, NGO, corporation, club, etc.
- * 
+ *
  * @see https://schema.org/Organization
  */
 export type Organization = Agent & {
   type: 'Organization'
 
   /**
-   * A relationship between an organization and a department 
-   * of that organization, also described as an organization 
-   * (allowing different urls, logos, opening hours). For 
-   * example: a store with a pharmacy, or a bakery with a cafe. 
+   * A relationship between an organization and a department
+   * of that organization, also described as an organization
+   * (allowing different urls, logos, opening hours). For
+   * example: a store with a pharmacy, or a bakery with a cafe.
    */
   department?: Organization[]
 }
 
 /**
  * A software application.
- * 
+ *
  * @see https://schema.org/SoftwareApplication
  */
 export type Software = Agent & {
@@ -198,15 +199,15 @@ export type Software = Agent & {
 export type Reference = Atom & {
   type: 'Reference'
   id: string
-  name: string 
+  name: string
 
-  category1: string 
-  category2?: string 
+  category1: string
+  category2?: string
   category3?: string
   category4?: string
 
   /**
-   * TBD what this looks like. Some sort of 
+   * TBD what this looks like. Some sort of
    * identifier for where referenced things live.
    */
   source?: string
@@ -214,9 +215,9 @@ export type Reference = Atom & {
 
 /**
  * A mailing address.
- * 
+ *
  * Examples:
- * 
+ *
  * ```json
  * {
  *  "type": "PostalAddress",
@@ -226,7 +227,7 @@ export type Reference = Atom & {
  *  "streetAddress": "20341 Whitworth\nInstitute 405 N. Whitworth"
  * }
  * ```
- * 
+ *
  * ```json
  * {
  *  "type": "PostalAddress",
@@ -235,40 +236,40 @@ export type Reference = Atom & {
  *  "streetAddress": "38 avenue de l'Opera"
  * },
  * ```
- * 
+ *
  * @see https://schema.org/PostalAddress
  */
 export type PostalAddress = Atom & {
   type: 'PostalAddress',
 
   /**
-   * The country. For example, USA. You can also provide the two-letter 
+   * The country. For example, USA. You can also provide the two-letter
    * [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1).
    */
   addressCountry: string
 
   /**
-   * The locality in which the street address is, and which is in the 
-   * region. For example, Mountain View. 
+   * The locality in which the street address is, and which is in the
+   * region. For example, Mountain View.
    */
   addressLocality: string
 
   /**
-   * The region in which the locality is, and which is in the country. 
-   * For example, California or another appropriate first-level 
+   * The region in which the locality is, and which is in the country.
+   * For example, California or another appropriate first-level
    * [Administrative division](https://en.wikipedia.org/wiki/List_of_administrative_divisions_by_country).
    */
   addressRegion?: string
 
   /**
-   * The post office box number for PO box addresses. 
+   * The post office box number for PO box addresses.
    */
   postOfficeBoxNumber?: string
 
   /**
-   * The postal code. For example, 94043. 
+   * The postal code. For example, 94043.
    */
-  postalCode?: string 
+  postalCode?: string
 
   /**
    * The street address. For example, 1600 Amphitheatre Pkwy.
@@ -280,11 +281,11 @@ export type PostalAddress = Atom & {
 }
 
 /**
- * An educational or occupational credential. A diploma, academic 
- * degree, certification, qualification, badge, etc., that may 
- * be awarded to a person or other entity that meets the requirements 
+ * An educational or occupational credential. A diploma, academic
+ * degree, certification, qualification, badge, etc., that may
+ * be awarded to a person or other entity that meets the requirements
  * defined by the credentialer.
- * 
+ *
  * @see https://schema.org/EducationalOccupationalCredential
  */
 export type EducationalOccupationalCredential = Atom & {
@@ -300,23 +301,23 @@ export type EducationalOccupationalCredential = Atom & {
   expires: DateTime
 
   /**
-   * An organization that acknowledges the validity, value or 
-   * utility of a credential. Note: recognition may include a 
-   * process of quality assurance or accreditation. 
+   * An organization that acknowledges the validity, value or
+   * utility of a credential. Note: recognition may include a
+   * process of quality assurance or accreditation.
    */
   recognizedBy?: Organization
 
   /**
-   * The category or type of credential being described, 
-   * for example "degree”, “certificate”, “badge”, or more 
-   * specific term. 
+   * The category or type of credential being described,
+   * for example "degree”, “certificate”, “badge”, or more
+   * specific term.
    */
   credentialCategory?: string
 }
 
 /**
  * An electronic file or document.
- * 
+ *
  * @see https://schema.org/DigitalDocument
  */
 export type DigitalDocument = {
@@ -325,7 +326,7 @@ export type DigitalDocument = {
   creator?: Agent
 
   name: string
-  description?: string 
+  description?: string
 
   dateCreated?: DateTime
   dateModified?: DateTime
@@ -335,11 +336,11 @@ export type DigitalDocument = {
 
   keywords?: string[]
 
-  // TODO: Source document linkage, tags, and all that jazz. 
+  // TODO: Source document linkage, tags, and all that jazz.
   // See what can be standardized between schema.org and ORIS/DMS
 
   /**
-   * Indicates a potential Action, which describes an idealized 
+   * Indicates a potential Action, which describes an idealized
    * action in which this thing would play an 'object' role.
    */
   potentialAction?: Action[]
@@ -347,32 +348,32 @@ export type DigitalDocument = {
 
 /**
  * The status of an Action.
- * 
+ *
  * @see https://schema.org/ActionStatusType
  */
 export enum ActionStatusType {
-  /** 
-   * An in-progress action (e..g, while watching the 
-   * movie, or driving to a location). 
+  /**
+   * An in-progress action (e..g, while watching the
+   * movie, or driving to a location).
    */
   ActiveActionStatus,
 
   /** An action that has already taken place. */
   CompletedActionStatus,
-  
+
   /** An action that failed to complete. */
   FailedActionStatus,
-  
+
   /** A description of an action that is supported. */
   PotentialActionStatus,
 }
 
 /**
- * An action performed by a direct agent and indirect participants upon a 
- * direct object. Optionally happens at a location with the help of an 
- * inanimate instrument. The execution of the action may produce a 
+ * An action performed by a direct agent and indirect participants upon a
+ * direct object. Optionally happens at a location with the help of an
+ * inanimate instrument. The execution of the action may produce a
  * result.
- * 
+ *
  * @see https://schema.org/docs/actions.html
  */
 export type Action = Atom & {
@@ -386,7 +387,7 @@ export type Action = Atom & {
   description?: string
 
   /**
-   * For failed actions, more information on the cause of the failure. 
+   * For failed actions, more information on the cause of the failure.
    */
   error?: string // NOTE: schema.org uses 'Thing' here. We may not
                  // need it at all if the description includes the error
@@ -402,12 +403,80 @@ export type Action = Atom & {
    */
   endTime?: DateTime
 
-  /** 
-   * Other co-agents that participated in the action indirectly. 
-   * E.g. John wrote a book with Steve. 
+  /**
+   * Other co-agents that participated in the action indirectly.
+   * E.g. John wrote a book with Steve.
    */
   participant?: Agent[]
 
   // Omitted: object: Thing.
   // Bit complicated to define when it can be anything
+}
+
+/**
+ * The participant who is at the sending end of the action.
+ *
+ * @see https://schema.org/sender
+ */
+export type Sender = Person | Organization;
+
+/**
+ * The participant who is at the receiving end of the action.
+ *
+ * @see https://schema.org/recipient
+ */
+export type Recipient = Person | Organization;
+
+/**
+ * An email message.
+ *
+ * @see https://schema.org/EmailMessage
+ */
+export type EmailMessage = Atom & {
+  type: 'EmailMessage'
+
+  /**
+   * The participant who is at the sending end of the action.
+   */
+  sender?: Sender
+
+  /**
+   * The recipients who were directly sent the message.
+   */
+  toRecipient: Recipient[]
+
+  /**
+   * The recipients copied on a message.
+   */
+  ccRecipient?: Recipient[]
+
+  /**
+   * The recipients blind copied on a message.
+   */
+  bccRecipient?: Recipient[]
+
+  /** List of documents attached to this message */
+  messageAttachment?: DigitalDocument[]
+
+  /**
+   * Title of the email
+   */
+  headline: string;
+
+  /**
+   * The text of this email
+   */
+  text: string;
+
+  /**
+   * Media type expressed using a MIME format.
+   *
+   * Often `text/html` or `text/plain`.
+   */
+  encodingFormat: string
+
+  /**
+   * The date/time at which the message was sent.
+   */
+  dateSent?: DateTime
 }
