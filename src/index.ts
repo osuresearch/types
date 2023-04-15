@@ -24,6 +24,7 @@ export const atomicClass = [
 
   'PostalAddress',
   'EducationalOccupationalCredential',
+  'MediaObject',
   'DigitalDocument',
   'Action',
   'EmailMessage',
@@ -36,7 +37,7 @@ export type AnyAtom = Text | Website | Email | Flag
   | DateTime | DateTimeRange
   | Person | Organization | Software
   | Reference | PostalAddress | EducationalOccupationalCredential
-  | DigitalDocument | Action | EmailMessage
+  | MediaObject | DigitalDocument | Action | EmailMessage
 
 export type Atom = {
   /**
@@ -320,43 +321,84 @@ export type EducationalOccupationalCredential = Atom & {
 }
 
 /**
- * An electronic file or document.
+ * A media object, such as an image, video, or audio object embedded
+ * in a web page or a downloadable dataset.
+ *
+ * @see https://schema.org/MediaObject
+ */
+export type MediaObject = {
+  type: 'MediaObject'
+
+  /** The IRI that identifies the item. */
+  id?: string
+
+  /** The creator/author of this item. */
+  creator?: Agent
+
+  /** The name of the item. */
+  name: string
+
+  /** A description of the item. */
+  description?: string
+
+  /** The date/time at which the item was created. */
+  dateCreated?: DateTime
+
+  /** The date/time at which the item was created. */
+  dateModified?: DateTime
+
+  /** File size in (mega/kilo)bytes. */
+  contentSize?: string
+
+  /** Actual bytes of the media object, for example the image file or video file. */
+  contentUrl: string
+
+  /**
+   * Media type expressed using a MIME format.
+   */
+  encodingFormat: string
+
+  /** Keywords or tags used to describe the item. */
+  keywords?: string[]
+
+  /**
+   * Indicates a potential Action, which describes an idealized
+   * action in which this thing would play an 'object' role.
+   */
+  potentialAction?: Action[]
+}
+
+/**
+ * An electronic document.
  *
  * @see https://schema.org/DigitalDocument
  */
 export type DigitalDocument = {
   type: 'DigitalDocument'
 
-  /**
-   * The IRI that identifies the agent.
-   */
+  /** The IRI that identifies the item. */
   id?: string
 
+  /** The creator/author of this item. */
   creator?: Agent
 
+  /** The name of the item. */
   name: string
+
+  /** A description of the item. */
   description?: string
 
-  /**
-   * The date/time at which the document was created.
-   */
+  /** The date/time at which the item was created. */
   dateCreated?: DateTime
 
-  /**
-   * The date/time at which the document was created.
-   */
+  /** The date/time at which the item was created. */
   dateModified?: DateTime
 
   /** The textual content of this work. */
   text?: string
 
-  /**
-   * Keywords or tags used to describe the document
-   */
+  /** Keywords or tags used to describe the item. */
   keywords?: string[]
-
-  // TODO: Source document linkage, tags, and all that jazz.
-  // See what can be standardized between schema.org and ORIS/DMS
 
   /**
    * Indicates a potential Action, which describes an idealized
