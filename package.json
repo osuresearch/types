@@ -1,19 +1,19 @@
 {
-  "name": "@osuresearch/atomics",
+  "name": "@osuresearch/types",
   "version": "0.0.0",
   "license": "MIT",
   "private": false,
-  "description": "Atomic data types, definitions, transformers, and resolvers ",
+  "description": "Atomic data types, definitions, transformers, and resolvers",
   "keywords": [
     "ohio-state-university"
   ],
-  "homepage": "https://github.com/osuresearch/atomics",
+  "homepage": "https://github.com/osuresearch/types",
   "repository": {
     "type": "git",
-    "url": "https://github.com/osuresearch/atomics"
+    "url": "https://github.com/osuresearch/types"
   },
   "bugs": {
-    "url": "https://github.com/osuresearch/atomics/issues"
+    "url": "https://github.com/osuresearch/types/issues"
   },
   "author": {
     "name": "Chase McManning",
