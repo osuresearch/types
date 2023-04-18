@@ -1,0 +1,27 @@
+name: Release
+on:
+  push:
+    branches:
+      - main
+      - next
+      - alpha
+      - beta
+      - "*.x"
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      # No build process yet for this library.
+      # We deploy TypeScript and GraphQL definitions as-is.
+
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npx semantic-release@19
