@@ -440,9 +440,9 @@ export enum ActionStatusType {
 export type Action = Atom & {
   type: 'Action'
 
-  actionStatus: ActionStatusType
+  actionStatus?: ActionStatusType
 
-  actor: Agent
+  actor?: Agent
 
   name: string
   description?: string
