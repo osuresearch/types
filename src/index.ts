@@ -206,10 +206,10 @@ export type Reference = Atom & {
   id: string
   name: string
 
-  category1: string
-  category2?: string
-  category3?: string
-  category4?: string
+  categoryLvl1?: string
+  categoryLvl2?: string
+  categoryLvl3?: string
+  categoryLvl4?: string
 
   /**
    * TBD what this looks like. Some sort of
