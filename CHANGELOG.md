@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/osuresearch/types/compare/v1.0.1...v1.0.2) (2023-04-24)
+
+
+### Bug Fixes
+
+* change `Reference` categories to `categoryLvl1-4` to be consistent resource types ([f147017](https://github.com/osuresearch/types/commit/f147017e471908e5b60c7bc538234574ff476465))
+
 ## [1.0.1](https://github.com/osuresearch/types/compare/v1.0.0...v1.0.1) (2023-04-21)
 
 
