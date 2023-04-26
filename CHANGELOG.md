@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/osuresearch/types/compare/v1.0.2...v1.0.3) (2023-04-26)
+
+
+### Bug Fixes
+
+* `EmailMessage.messageAttachment` to use `MediaObject` to support a wider range of content types ([8678809](https://github.com/osuresearch/types/commit/86788092c70d8fbe767912c91d223be6c3fc08b1))
+
 ## [1.0.2](https://github.com/osuresearch/types/compare/v1.0.1...v1.0.2) (2023-04-24)
 
 
