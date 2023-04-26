@@ -516,8 +516,8 @@ export type EmailMessage = Atom & {
    */
   bccRecipient?: Recipient[]
 
-  /** List of documents attached to this message */
-  messageAttachment?: DigitalDocument[]
+  /** List of media attached to this message */
+  messageAttachment?: MediaObject[]
 
   /**
    * Title of the email
