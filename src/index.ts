@@ -299,11 +299,18 @@ export type EducationalOccupationalCredential = Atom & {
   alternateName?: string
   description?: string
 
-  /** The date on which the credential was created. */
-  dateCreated: DateTime
+  /** The date on which the credential was created.
+   * In the form `[-]CCYY-MM-DDThh:mm:ss[Z|(+|-)hh:mm]`
+   * (see Chapter 5.4 of ISO 8601)
+   */
+  dateCreated: string
 
-  /** Date the content expires and is no longer useful or available. */
-  expires: DateTime
+  /** Date the content expires and is no longer useful or available.
+   *
+   * In the form `[-]CCYY-MM-DDThh:mm:ss[Z|(+|-)hh:mm]`
+   * (see Chapter 5.4 of ISO 8601)
+   */
+  expires: string
 
   /**
    * An organization that acknowledges the validity, value or
@@ -341,11 +348,19 @@ export type MediaObject = {
   /** A description of the item. */
   description?: string
 
-  /** The date/time at which the item was created. */
-  dateCreated?: DateTime
+  /** The date/time at which the item was created.
+   *
+   * In the form `[-]CCYY-MM-DDThh:mm:ss[Z|(+|-)hh:mm]`
+   * (see Chapter 5.4 of ISO 8601)
+   */
+  dateCreated?: string
 
-  /** The date/time at which the item was created. */
-  dateModified?: DateTime
+  /** The date/time at which the item was created.
+   *
+   * In the form `[-]CCYY-MM-DDThh:mm:ss[Z|(+|-)hh:mm]`
+   * (see Chapter 5.4 of ISO 8601)
+   */
+  dateModified?: string
 
   /** File size in (mega/kilo)bytes. */
   contentSize?: string
@@ -537,17 +552,24 @@ export type EmailMessage = Atom & {
   encodingFormat: string
 
   /**
-   * The date/time at which the message was created.
+   * The date/time at which the message was created
+   * in the form `[-]CCYY-MM-DDThh:mm:ss[Z|(+|-)hh:mm]`
+   * (see Chapter 5.4 of ISO 8601)
    */
-  dateCreated?: DateTime
+  dateCreated?: string
 
   /**
-   * The date/time at which the message was modified.
+   * The date/time at which the message was modified
+   * in the form `[-]CCYY-MM-DDThh:mm:ss[Z|(+|-)hh:mm]`
+   * (see Chapter 5.4 of ISO 8601)
+   *
    */
-  dateModified?: DateTime
+  dateModified?: string
 
   /**
-   * The date/time at which the message was sent.
+   * The date/time at which the message was sent
+   * in the form `[-]CCYY-MM-DDThh:mm:ss[Z|(+|-)hh:mm]`
+   * (see Chapter 5.4 of ISO 8601)
    */
-  dateSent?: DateTime
+  dateSent?: string
 }
