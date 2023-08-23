@@ -480,14 +480,28 @@ export type Action = Atom & {
   endTime?: DateTime
 
   /**
+   * For actions that have been retracted.
+   *
+   * In the form `[-]CCYY-MM-DDThh:mm:ss[Z|(+|-)hh:mm]`
+   * (see Chapter 5.4 of ISO 8601)
+   */
+  retractedTime?: string;
+
+  /**
    * Other co-agents that participated in the action indirectly.
    * E.g. John wrote a book with Steve.
    */
-  participant?: Agent[]
+  participant?: Agent[];
 
-  // Omitted: object: Thing.
-  // Bit complicated to define when it can be anything
-}
+  /**
+   * The object upon which the action is carried out,
+   * whose state is kept intact or changed.
+   */
+  object: Resource;
+
+  /** The result produced in the action. */
+  result?: Atom[];
+};
 
 /**
  * The participant who is at the sending end of the action.
