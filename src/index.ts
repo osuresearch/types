@@ -463,31 +463,37 @@ export enum ActionStatusType {
  * @see https://schema.org/docs/actions.html
  */
 export type Action = Atom & {
-  type: 'Action'
+  type: "Action";
 
-  actionStatus?: ActionStatusType
+  actionStatus?: ActionStatusType;
 
-  actor?: Agent
+  actor?: Agent;
 
-  name: string
-  description?: string
-
-  /**
-   * For failed actions, more information on the cause of the failure.
-   */
-  error?: string // NOTE: schema.org uses 'Thing' here. We may not
-                 // need it at all if the description includes the error
-                 // and the status type is FailedActionStatus
+  name: string;
+  description?: string;
 
   /**
-   * For actions that span a period of time, when the action was performed.
+   * For failed actions, more information on the
+   * cause of the failure.
    */
-  startTime?: DateTime
+  error?: string;
 
   /**
-   * For actions that span a period of time, when the action was performed.
+   * When the action was performed.
+   *
+   * In the form `[-]CCYY-MM-DDThh:mm:ss[Z|(+|-)hh:mm]`
+   * (see Chapter 5.4 of ISO 8601)
    */
-  endTime?: DateTime
+  startTime?: string;
+
+  /**
+   * For actions that span a period of time, when the
+   * action was performed.
+   *
+   * In the form `[-]CCYY-MM-DDThh:mm:ss[Z|(+|-)hh:mm]`
+   * (see Chapter 5.4 of ISO 8601)
+   */
+  endTime?: string;
 
   /**
    * For actions that have been retracted.
@@ -533,30 +539,30 @@ export type Recipient = Person | Organization;
  * @see https://schema.org/EmailMessage
  */
 export type EmailMessage = Atom & {
-  type: 'EmailMessage'
+  type: "EmailMessage";
 
   /**
    * The participant who is at the sending end of the action.
    */
-  sender?: Sender
+  sender?: Sender;
 
   /**
    * The recipients who were directly sent the message.
    */
-  toRecipient: Recipient[]
+  toRecipient: Recipient[];
 
   /**
    * The recipients copied on a message.
    */
-  ccRecipient?: Recipient[]
+  ccRecipient?: Recipient[];
 
   /**
    * The recipients blind copied on a message.
    */
-  bccRecipient?: Recipient[]
+  bccRecipient?: Recipient[];
 
   /** List of media attached to this message */
-  messageAttachment?: MediaObject[]
+  messageAttachment?: MediaObject[];
 
   /**
    * Title of the email
@@ -573,14 +579,14 @@ export type EmailMessage = Atom & {
    *
    * Often `text/html` or `text/plain`.
    */
-  encodingFormat: string
+  encodingFormat: string;
 
   /**
    * The date/time at which the message was created
    * in the form `[-]CCYY-MM-DDThh:mm:ss[Z|(+|-)hh:mm]`
    * (see Chapter 5.4 of ISO 8601)
    */
-  dateCreated?: string
+  dateCreated?: string;
 
   /**
    * The date/time at which the message was modified
@@ -588,12 +594,12 @@ export type EmailMessage = Atom & {
    * (see Chapter 5.4 of ISO 8601)
    *
    */
-  dateModified?: string
+  dateModified?: string;
 
   /**
    * The date/time at which the message was sent
    * in the form `[-]CCYY-MM-DDThh:mm:ss[Z|(+|-)hh:mm]`
    * (see Chapter 5.4 of ISO 8601)
    */
-  dateSent?: string
-}
+  dateSent?: string;
+};
