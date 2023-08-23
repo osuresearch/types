@@ -449,6 +449,9 @@ export enum ActionStatusType {
 
   /** A description of an action that is supported. */
   PotentialActionStatus,
+
+  /** An action that has been undone/retracted. */
+  RetractedActionStatus,
 }
 
 /**
